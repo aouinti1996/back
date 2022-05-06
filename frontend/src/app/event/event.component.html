@@ -1,0 +1,97 @@
+<h1 style="text-align: center; font-size: xxx-large; font-family: 'Source Sans Pro', sans-serif;  padding:  12px 28px">Add Event</h1>
+<!--FORM EVENT BEGIN-->
+<div class="container" style="margin-top: 30px ">
+  <form #f="ngForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input [class.is-invalid]="e.invalid && e.touched" type="text" name="name" class="form-control" [(ngModel)]="event.name" required #e="ngModel">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input [class.is-invalid]="d.invalid && d.touched" type="text" name="description" class="form-control" [(ngModel)]="event.description" required #d="ngModel">
+    </div>
+    <div class="form-group">
+      <label>Start Day</label>
+      <input [class.is-invalid]="sd.invalid && sd.touched" type="date" name="startDate" class="form-control" [(ngModel)]="event.startDate" required #sd="ngModel">
+    </div>
+    <div class="form-group">
+      <label>End Day</label>
+      <input [class.is-invalid]="ed.invalid && ed.touched" type="date" name="endDate" class="form-control" [(ngModel)]="event.endDate" required #ed="ngModel">
+    </div>
+    <div class="form-group">
+      <label>Attends Number</label>
+      <input [class.is-invalid]="an.invalid && an.touched" type="number" name="attendsNumber" class="form-control" [(ngModel)]="event.attendsNumber" required #an="ngModel">
+    </div>
+    <div class="form-group">
+      <label>Event Type</label>
+      <select [class.is-invalid]="et.invalid && et.touched" class="form-select" name="eventType" [(ngModel)]="event.eventType" required #et="ngModel">
+        <option *ngFor="let key of keys" [value]="eventType[key]" [label]="eventType[key]"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Office</label>
+      <select (change)="update($event)" [class.is-invalid]="o.invalid && o.touched" class="form-select" name="office" ngModel required #o="ngModel">
+        <option *ngFor="let o of listOffice " [value]="o.idOffice" [label]="o['officeName']"></option>
+      </select>
+      <div class="d-grid gap-2">
+        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add Office
+        </button>
+      </div>
+    </div>
+    <div class="form-group" style="margin-top: 10px">
+      <label>Upload Image</label><br>
+      <input type="file" accept="image/*" (change)="onSelectedImage($event)" class="form-control"><br>
+      <img [src]="imageURL" height="200" *ngIf="imageURL" style="margin-right: 20px;"><br>
+    </div>
+    <div class="d-grid gap-2">
+      <button class="btn btn-outline-danger" (click)="saveEvent()" [disabled]="f.invalid" >save</button>
+    </div>
+  </form>
+
+</div>
+<!--FORM EVENT END-->
+
+<div class="body table-responsive" style="margin-top: 20px">
+  <table class="table table-bordered">
+    <tr *ngFor="let e of listEvent">
+      <td>{{e.idEvent}}</td>
+      <td>{{e.name}}</td>
+      <td>{{e.eventType}}</td>
+      <td>{{e.startDate}}</td>
+      <button class="btn-success" (click)="deleteEvent(e.idEvent)">Delete</button>
+    </tr>
+  </table>
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Office</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #fO="ngForm">
+          <div class="form-group">
+            <label>Office Name</label>
+            <input type="text" name="name" [(ngModel)]="office.officeName" class="form-control" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" [disabled]="fO.invalid" (click)="addOffice()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

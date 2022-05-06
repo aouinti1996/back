@@ -1,0 +1,100 @@
+<div class="container">
+<!--  Carousel starts-->
+  <h2 style="color: whitesmoke">aaa</h2>
+  <div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/images/ramadan.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/eid.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/friday.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center; font-family: cursive; font-size: xx-large;">WellCo Events</h5>
+    </div>
+  </div>
+
+<!-- Carousel ends-->
+  <div class="card-group" *ngFor="let e of eventList" >
+    <div class="card" >
+      <img src="assets/images/event1.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size: large">{{e.name}}</h5>
+        <p class="card-text">{{e.description}}.</p>
+<!--        <p class="card-text"><small class="text-muted">Last updated {{e.}}</small></p>-->
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-outline-success me-md-2" data-bs-toggle="modal" data-bs-target="#eventDetails" (click)="eventDetails(e)">More Details</button>
+        <button class="btn btn-outline-primary me-md-2" type="button">Participate</button>
+        <button class="btn btn-outline-warning me-md-2" type="button">Send To</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="eventDetails" tabindex="-1" aria-labelledby="eventDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-size: large">Event Detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <div class="container">
+          <label>{{event.name}}</label>
+          <img src="assets/images/event1.jpg" class="card-img-top" alt="">
+
+          <p>{{event.description}}</p>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label>Start Date</label>
+              <input type="date" [value]="event.startDate">
+            </div>
+            <div class="col-md-4">
+              <label>End Date</label>
+              <input type="date" [value]="event.endDate">
+            </div>
+            <div class="col-md-6">
+              <label>Attends Number</label>
+              <input type="number" [value]="event.attendsNumber">
+            </div>
+            <div class="col-md-6">
+              <label>Event Type</label>
+              <input type="text" [value]="event.eventType">
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="container">
+          <label>Place</label>
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
